@@ -1,5 +1,5 @@
 # Steganography
-Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection. The secret data is then extracted at its destination. In this project LSB overriding technique is used.
+Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection. The secret data is then extracted at its destination. In this project LSB(Least Significant Bit) overriding technique is used.
 
 
 ![ezgif-2-4179d5ba63a1](https://user-images.githubusercontent.com/44112210/76521353-aed9df80-648a-11ea-8424-eddb7c9a2509.png)
