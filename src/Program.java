@@ -1,4 +1,4 @@
-dddimport java.util.Scanner;
+import java.util.Scanner;
 import java.io.File;
 
 class Program
