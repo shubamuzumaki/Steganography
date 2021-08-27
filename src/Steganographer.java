@@ -5,22 +5,10 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 
-class Steganographer {
-
-    public static long getEmbeddigCapacity(String vesselImagePath) throws Exception {
-        BufferedImage srcImage = ImageIO.read(new File(vesselImagePath));
-        long embeddingCapacity = srcImage.getWidth()*srcImage.getHeight() - HeaderManager.HEADER_LENGTH;
-        return embeddingCapacity;
-    } 
-
-
-    public static File embed(String vesselImagePath,
-                             String secretFilePath,
-                             String password) throws Exception {
-        File vesselFile = new File(vesselImagePath);
-        File secretFile = new File(secretFilePath);
-        File outputFile = new File("Doctored_Image");
-
+class Steganographer
+{
+    public static void embed(File vesselFile, File secretFile, String password, File outputFile) throws Exception
+    {
         BufferedImage srcImage = ImageIO.read(vesselFile);
         
         //calculate embedding capacity
@@ -76,18 +64,14 @@ class Steganographer {
             }//inner for
         }//outer for
 
+        System.out.println("@completed");
         //!CAREFUL HERE ".png" doesn't work and give no error
         ImageIO.write(srcImage, "png", outputFile);
         toBeEmbed.close();
-
-        return outputFile;
     }//embed
 
-    public static File extract(String doctoredImagePath, String password) throws Exception
+    public static void extract(File vesselFile, String password) throws Exception
     {
-        File vesselFile = new File(doctoredImagePath);
-        File outputFile = null;
-
         BufferedImage srcImage = ImageIO.read(vesselFile);
 
         //initialize vars
@@ -121,8 +105,8 @@ class Steganographer {
                     header.append((char)data);
                     if(embedInd == HeaderManager.HEADER_LENGTH-1)//header extraction completes
                     {
-                        outputFile = new File("Extracted_" + HeaderManager.getFileName(header.toString()));
-                        fout = new FileOutputStream(outputFile);
+                        System.out.println(header);
+                        fout = new FileOutputStream("Extracted_" + HeaderManager.getFileName(header.toString()));
                         hiddenDataLength = HeaderManager.getFileLength(header.toString()) + HeaderManager.HEADER_LENGTH;
                     }            
                 }   
@@ -140,7 +124,7 @@ class Steganographer {
             }//inner for
         }//outer for
 
+        System.out.println("@completed");
         fout.close();
-        return outputFile;
     }
 }
