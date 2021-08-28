@@ -19,7 +19,7 @@ class Steganographer {
                              String password) throws Exception {
         File vesselFile = new File(vesselImagePath);
         File secretFile = new File(secretFilePath);
-        File outputFile = new File("Doctored_Image");
+        File outputFile = new File("doctored_image.png");
 
         BufferedImage srcImage = ImageIO.read(vesselFile);
         

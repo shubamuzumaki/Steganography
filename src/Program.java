@@ -5,21 +5,29 @@ import java.text.NumberFormat;
 class Program
 {
     static Scanner scan = new Scanner(System.in);
-    static final String basicMethodHelp = "placeholder help about how basic method works";
-    static final String proMethodHelp = "placeholder help about how pro method works";
+    static final String basicMethodHelp = "placeholder help about how basic mode works";
+    static final String proMethodHelp = "placeholder help about how pro mode works";
+
+    //Testing purpose only
+    static final String vesselImagePathTest = "/home/s41n7/Documents/ACAD/Steganography/data/violet.png";
+    static final String secretFile1PathTest = "/home/s41n7/Documents/ACAD/Steganography/data/secret.txt";
+    static final String secretFile2PathTest = "/home/s41n7/Documents/ACAD/Steganography/data/super_secret.txt";
+    static final String doctoredImagePathTest = "/home/s41n7/Documents/ACAD/Steganography/data/Doctored_Image.png";
+    static final String password1Test = "123";
+    static final String password2Test = "1234";
 
     public static void main(String[] args) 
     {
         System.out.println("**********[ STEGANOGRAPHY ]**********");
-        System.out.println("1.Basic Hide");
-        System.out.println("2.Pro Hide");
+        System.out.println("1.Basic Mode");
+        System.out.println("2.Pro Mode");
         System.out.println("3.Extract");
 
         int ch = scan.nextInt();
         if(ch == 1)
-            basicHide();
+            basicMode();
         else if(ch == 2)
-            proHide();
+            proMode();
         else if(ch == 3)
             extract();
         else
@@ -27,7 +35,7 @@ class Program
 
     }
 
-    private static void basicHide(){
+    private static void basicMode(){
         
         try{
 
@@ -42,7 +50,8 @@ class Program
             System.out.print("Path to vessel image: ");
             vesselImagePath = scan.next();
 
-            vesselImagePath = "/home/sa1n7/Documents/Acad/Steganography/data/violet.png";
+            //TODO: Testing
+            vesselImagePath = vesselImagePathTest;
             
             long embeddingCapacity = Steganographer.getEmbeddigCapacity(vesselImagePath);
             System.out.println("You can hide around "+ byteToKB(embeddingCapacity) + " KB in this image");
@@ -54,16 +63,16 @@ class Program
             System.out.print("Password            : ");
             password = scan.next();
 
-            //Testing purpose only
-            secretFilePath = "/home/sa1n7/Documents/Acad/Steganography/data/secret.txt";
-            password = "1234";
+            //TODO: Testing
+            secretFilePath = secretFile1PathTest;
+            password = password1Test;
 
 
             System.out.println("Hiding your secrets...");
 
             File outputFile = Steganographer.embed(vesselImagePath, secretFilePath, password);
             System.out.println("Secrets hidden successfully.");
-            System.out.print("Output Image Path: " + outputFile.getAbsolutePath());
+            System.out.println("Output Image Path: " + outputFile.getAbsolutePath());
 
         }catch(Exception e){
             System.out.println("Failed to hide your secrets.");
@@ -74,7 +83,7 @@ class Program
 
     }
 
-    private static void proHide(){
+    private static void proMode(){
 
     }
 
@@ -91,9 +100,9 @@ class Program
             System.out.print("Password            : ");
             password = scan.next();
 
-            //Testing purpose only
-            doctoredImagePath = "/home/sa1n7/Documents/Acad/Steganography/data/Doctored_Image";
-            password = "1234";
+            //TODO: Testing
+            doctoredImagePath = doctoredImagePathTest;
+            password = password1Test;
 
             System.out.println("Extracting your secrets...");
 
