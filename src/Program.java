@@ -5,16 +5,18 @@ import java.text.NumberFormat;
 class Program
 {
     static Scanner scan = new Scanner(System.in);
-    static final String basicMethodHelp = "placeholder help about how basic mode works";
-    static final String proMethodHelp = "placeholder help about how pro mode works";
+    static final String basicMethodHelp = "This mode hide 1 secret file in Image.";
+    static final String proMethodHelp = "This mode can hide 2 different file in same image.\nEach with their unique password.\nPassword supplied during extraction will decide which file will be extracted.";
 
     //Testing purpose only
+    /*
     static final String vesselImagePathTest = "data/vessel.jpg";
     static final String secretFile1PathTest = "data/secret.jpg";
     static final String secretFile2PathTest = "data/top_secret.jpg";
     static final String doctoredImagePathTest = "data/doctored_image.png";
     static final String password1Test = "123";
     static final String password2Test = "1234";
+    */
 
     public static void main(String[] args) 
     {
@@ -51,7 +53,7 @@ class Program
             vesselImagePath = scan.next();
 
             //TODO: Testing
-            vesselImagePath = vesselImagePathTest;
+            // vesselImagePath = vesselImagePathTest;
             
             long embeddingCapacity = Steganographer.getEmbeddigCapacity(vesselImagePath);
             System.out.println("You can hide around "+ byteToKB(embeddingCapacity) + " KB in this image");
@@ -64,10 +66,10 @@ class Program
             password = scan.next();
 
             //TODO: Testing
-            // /*
+            /*
             secretFilePath = secretFile1PathTest;
             password = password1Test;
-            // */ 
+            */ 
 
             System.out.println("Hiding your secrets...");
 
@@ -98,7 +100,7 @@ class Program
             vesselImagePath = scan.next();
 
             //TODO: Testing
-            vesselImagePath = vesselImagePathTest;
+            // vesselImagePath = vesselImagePathTest;
             
             long embeddingCapacity = Steganographer.getEmbeddigCapacity(vesselImagePath);
             System.out.println("You can hide around "+ byteToKB(embeddingCapacity) + " KB in this image");
@@ -111,7 +113,7 @@ class Program
             password1 = scan.next();
 
             System.out.print("\nPath to not super secret file : ");
-            secretFile1Path = scan.next();
+            secretFile2Path = scan.next();
 
             do{
                 System.out.print("Password                      : ");
@@ -127,12 +129,12 @@ class Program
 
 
             //TODO: Testing
-            // /*
+            /*
             secretFile1Path = secretFile1PathTest;
             password1 = password1Test;
             secretFile2Path = secretFile2PathTest;
             password2 = password2Test;
-            // */
+            */
 
             System.out.println("Hiding your secrets...");
 
@@ -160,9 +162,9 @@ class Program
             password = scan.next();
 
             //TODO: Testing
-            doctoredImagePath = doctoredImagePathTest;
-            
+            // doctoredImagePath = doctoredImagePathTest;
             // password = password1Test;
+            
             System.out.println("Extracting your secrets...");
             
             File secretFile = Steganographer.extract(doctoredImagePath, password);
