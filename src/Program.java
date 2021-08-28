@@ -1,6 +1,4 @@
 import java.util.Scanner;
-
-
 import java.io.File;
 import java.text.NumberFormat;
 
@@ -11,10 +9,10 @@ class Program
     static final String proMethodHelp = "placeholder help about how pro mode works";
 
     //Testing purpose only
-    static final String vesselImagePathTest = "/home/s41n7/Documents/ACAD/Steganography/data/violet.png";
-    static final String secretFile1PathTest = "/home/s41n7/Documents/ACAD/Steganography/data/secret.txt";
-    static final String secretFile2PathTest = "/home/s41n7/Documents/ACAD/Steganography/data/super_secret.txt";
-    static final String doctoredImagePathTest = "/home/s41n7/Documents/ACAD/Steganography/data/Doctored_Image.png";
+    static final String vesselImagePathTest = "data/vessel.jpg";
+    static final String secretFile1PathTest = "data/secret.jpg";
+    static final String secretFile2PathTest = "data/top_secret.jpg";
+    static final String doctoredImagePathTest = "data/doctored_image.png";
     static final String password1Test = "123";
     static final String password2Test = "1234";
 
@@ -73,7 +71,7 @@ class Program
 
             System.out.println("Hiding your secrets...");
 
-            File outputFile = Steganographer.embed(vesselImagePath, secretFilePath, password);
+            File outputFile = Steganographer.basicEmbed(vesselImagePath, secretFilePath, password);
             System.out.println("Secrets hidden successfully.");
             System.out.println("Output Image Path: " + outputFile.getAbsolutePath());
 
@@ -81,9 +79,6 @@ class Program
             System.out.println("Failed to hide your secrets.");
             e.printStackTrace();
         }
-
-
-
     }
 
     private static void proMode(){
@@ -141,9 +136,9 @@ class Program
 
             System.out.println("Hiding your secrets...");
 
-            // File outputFile = Steganographer.embed(vesselImagePath, secretFilePath, password);
+            File outputFile = Steganographer.proEmbed(vesselImagePath, secretFile1Path, password1, secretFile2Path, password2);
             System.out.println("Secrets hidden successfully.");
-            // System.out.println("Output Image Path: " + outputFile.getAbsolutePath());
+            System.out.println("Output Image Path: " + outputFile.getAbsolutePath());
         }catch(Exception e){
             System.out.println("Failed to hide your secrets.");
             e.printStackTrace();
@@ -158,18 +153,18 @@ class Program
             String doctoredImagePath;
             String password;
 
-            System.out.print("Path to vessel image: ");
+            System.out.print("Path to doctored image: ");
             doctoredImagePath = scan.next();
 
-            System.out.print("Password            : ");
+            System.out.print("Password              : ");
             password = scan.next();
 
             //TODO: Testing
             doctoredImagePath = doctoredImagePathTest;
-            password = password1Test;
-
+            
+            // password = password1Test;
             System.out.println("Extracting your secrets...");
-
+            
             File secretFile = Steganographer.extract(doctoredImagePath, password);
 
             System.out.println("Secrets Extracted successfully.");
