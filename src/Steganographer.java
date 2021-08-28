@@ -7,6 +7,13 @@ import javax.imageio.ImageIO;
 
 class Steganographer {
 
+    private static File dataDir = new File("data");
+
+    static{
+        if(!dataDir.exists())
+            dataDir.mkdir();
+    }
+
     public static long getEmbeddigCapacity(String vesselImagePath) throws Exception {
         BufferedImage srcImage = ImageIO.read(new File(vesselImagePath));
         long embeddingCapacity = srcImage.getWidth()*srcImage.getHeight() - HeaderManager.HEADER_LENGTH;
@@ -17,9 +24,10 @@ class Steganographer {
     public static File embed(String vesselImagePath,
                              String secretFilePath,
                              String password) throws Exception {
+                                 
         File vesselFile = new File(vesselImagePath);
-        File secretFile = new File(secretFilePath);
-        File outputFile = new File("doctored_image.png");
+        File secretFile = new File(secretFilePath);        
+        File outputFile = new File(dataDir, "doctored_image.png");
 
         BufferedImage srcImage = ImageIO.read(vesselFile);
         
@@ -121,8 +129,8 @@ class Steganographer {
                     header.append((char)data);
                     if(embedInd == HeaderManager.HEADER_LENGTH-1)//header extraction completes
                     {
-                        outputFile = new File("Extracted_" + HeaderManager.getFileName(header.toString()));
                         fout = new FileOutputStream(outputFile);
+                        outputFile = new File(dataDir, "Extracted_" + HeaderManager.getFileName(header.toString()));
                         hiddenDataLength = HeaderManager.getFileLength(header.toString()) + HeaderManager.HEADER_LENGTH;
                     }            
                 }   

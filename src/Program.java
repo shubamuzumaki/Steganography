@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+
 import java.io.File;
 import java.text.NumberFormat;
 
@@ -39,7 +41,7 @@ class Program
         
         try{
 
-            System.out.println("\n**********[ BASIC Hide ]**********");
+            System.out.println("\n**********[ BASIC Mode ]**********");
             System.out.println(basicMethodHelp);
             System.out.println();
 
@@ -57,16 +59,17 @@ class Program
             System.out.println("You can hide around "+ byteToKB(embeddingCapacity) + " KB in this image");
 
             
-            System.out.print("Path to secret file : ");
+            System.out.print("\nPath to secret file : ");
             secretFilePath = scan.next();
 
             System.out.print("Password            : ");
             password = scan.next();
 
             //TODO: Testing
+            // /*
             secretFilePath = secretFile1PathTest;
             password = password1Test;
-
+            // */ 
 
             System.out.println("Hiding your secrets...");
 
@@ -84,6 +87,67 @@ class Program
     }
 
     private static void proMode(){
+        try{
+            System.out.println("\n**********[ PRO Mode ]**********");
+            System.out.println(proMethodHelp);
+            System.out.println();
+
+            String vesselImagePath;
+            String secretFile1Path;
+            String secretFile2Path;
+
+            String password1;
+            String password2;
+
+            System.out.print("Path to vessel image          : ");
+            vesselImagePath = scan.next();
+
+            //TODO: Testing
+            vesselImagePath = vesselImagePathTest;
+            
+            long embeddingCapacity = Steganographer.getEmbeddigCapacity(vesselImagePath);
+            System.out.println("You can hide around "+ byteToKB(embeddingCapacity) + " KB in this image");
+
+            
+            System.out.print("\nPath to less sensitive file   : ");
+            secretFile1Path = scan.next();
+
+            System.out.print("Password                      : ");
+            password1 = scan.next();
+
+            System.out.print("\nPath to not super secret file : ");
+            secretFile1Path = scan.next();
+
+            do{
+                System.out.print("Password                      : ");
+                password2 = scan.next();
+
+                if(password1.equals(password2)){
+                    System.out.println("You need to pick different password for both files.");
+                    System.out.println("NOTE: During Extraction file will be extracted based on the password supplied.");
+                    System.out.println();
+                }
+
+            }while(password1.equals(password2));
+
+
+            //TODO: Testing
+            // /*
+            secretFile1Path = secretFile1PathTest;
+            password1 = password1Test;
+            secretFile2Path = secretFile2PathTest;
+            password2 = password2Test;
+            // */
+
+            System.out.println("Hiding your secrets...");
+
+            // File outputFile = Steganographer.embed(vesselImagePath, secretFilePath, password);
+            System.out.println("Secrets hidden successfully.");
+            // System.out.println("Output Image Path: " + outputFile.getAbsolutePath());
+        }catch(Exception e){
+            System.out.println("Failed to hide your secrets.");
+            e.printStackTrace();
+        }
 
     }
 
